@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>终末地官网</title>
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0;
+             box-sizing: border-box;
+        }
+        html { 
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+            line-height: 1.8;
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 50%, #e8d5d5 100%); 
+            color: #333;
+            overflow-x: hidden;
+        }
+        .full-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        .cebian{
+            min-width: 4.5vw;
+            height: 100vh;
+            width: 4.5vw;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            background-color: rgb(255, 255, 255);
+            transition: 0.2s ease;
+            float: left;
+            position: absolute;
+            position: fixed
+
+        }
+        .zhuyemian{
+            height: 3000px;
+            width: 100vw;
+            
+        }
+        .diyiye{
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            flex-direction: row;
+            overflow: hidden;
+        }
+        .cebian:hover{
+            width: 10vw;
+            transition: 0.3s ease;
+        }
+        .zhuyemian img {
+            max-width: 100%;
+            height: auto;
+        }
+        .xiaotubiaocibianlandiyige{
+            width: 63px;
+            height: 67px;
+
+        }
+        .xiaotubiaocibianlandiyige{
+            margin-top: 13px;
+            margin-left: 7px;
+        }
+        .cebianlanneirong{
+            margin-top: 45px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+
+        }
+        .cebianxiaokuai{
+            box-sizing: content-box;
+            border-left: #050505 solid;
+            border-width: 5px;
+            display: inline-block;
+            box-sizing: content-box;
+            height: 49px;
+            border-left: #050505 solid;
+            border-width: 5px;
+
+        }
+        .xiaotubiaozuozhong{
+            height: 49px;
+            width: 66px;
+            display: block;
+        }
+        .zhuyemiantupian1{
+            height: 100%;
+            width: 100%;
+        }
+        .cebiandaohanglan{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            box-sizing: content-box;
+        }
+        .zi{
+            height: 30px;
+            width: 60;
+        }
+        .cebiandaohanglan li {
+            display: flex !important; 
+            flex-direction: row;
+            align-items: center; 
+            position: relative;
+       }
+       .cebiandaohanglan li > a {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+        }
+        .zi {
+            font-size: 12px;
+            color: #333;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            width: 0; 
+            overflow: hidden;
+            font-weight: bold;
+            
+        }
+        .cebian:hover .zi {
+            opacity: 1;
+            transform: translateX(0);
+            width: auto; 
+            margin-left: 15px;
+         }
+        .cebian:hover .nav-icon {
+            margin-right: 0; 
+        }
+        .cebianxiaokuaidongkuang {
+            position: absolute;
+            height: 49px; 
+            width: 200px; 
+            top: 0;
+            left: 0;
+            border-radius: 8px;
+            background-color: rgba(51, 51, 51, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            }
+
+        .cebiandaohanglan li:hover .cebianxiaokuaidongkuang {
+         opacity: 1;
+        }
+        .dierye{
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            flex-direction: row;
+            overflow: hidden;
+        }
+        .zhongyang{
+            justify-content: center;
+            align-items: center;
+
+        }
+        .wei{
+            height: 40vh;
+            width: 100vw;
+        }
+        .cebiandaohanglan li a.active .cebianxiaokuaidongkuang {
+            opacity: 1;
+             background-color: rgba(7, 7, 7, 0.2);
+        }
+
+    </style>
+    <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const daohangLianjie = document.querySelectorAll('.cebiandaohanglan a');
+    const yemianKuai = document.querySelectorAll('section[id]');
+    const cebianlan = document.querySelector('.cebian');
+
+    daohangLianjie.forEach(lianjie => {
+        lianjie.addEventListener('click', function(e) {
+            e.preventDefault();
+            const mubiaoId = this.getAttribute('href');
+            const mubiaoKuai = document.querySelector(mubiaoId);
+            
+            if (mubiaoKuai) {
+                window.scrollTo({
+                    top: mubiaoKuai.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    function gengxin() {
+        let dangqianKuaiId = '';
+        const gundongWeizhi = window.scrollY + 100;
+
+        yemianKuai.forEach(kuai => {
+            const kuaiDingbu = kuai.offsetTop;
+            const kuaiGaodu = kuai.clientHeight;
+            if (gundongWeizhi >= kuaiDingbu && gundongWeizhi < kuaiDingbu + kuaiGaodu) {
+                dangqianKuaiId = kuai.getAttribute('id');
+            }
+        });
+
+        daohangLianjie.forEach(lianjie => {
+            lianjie.classList.remove('active');
+            if (lianjie.getAttribute('href') === `#${dangqianKuaiId}`) {
+                lianjie.classList.add('active');
+            }
+        });
+
+        if (gundongWeizhi < yemianKuai[0].offsetTop) {
+            daohangLianjie.forEach(l => l.classList.remove('active'));
+            daohangLianjie[0].classList.add('active');
+        }
+    }
+
+    gengxin();
+    window.addEventListener('scroll', gengxin);
+
+    let cebianlanYanshi;
+    cebianlan.addEventListener('mouseleave', () => {
+        cebianlanYanshi = setTimeout(() => {}, 300);
+    });
+    cebianlan.addEventListener('mouseenter', () => {
+        clearTimeout(cebianlanYanshi);
+    });
+});
+    </script>
+</head>
+<body>
+    <section class="diyiye" id="home">
+
+            <div class="cebian">
+                <div class="xiaotubiaocibianlandiyigedegezi">
+                    <img class="xiaotubiaocibianlandiyige"  src="./xiaotubiao.png" alt="">
+                </div>
+
+
+
+                <div class="cebianlanneirong" >
+                 <nav class="cebiandaohanglan">
+                    <ul>
+                        <li class="lie"><a href="#home">
+                            <div class="cebianxiaokuai">
+                                <img class="xiaotubiaozuozhong" src="../zuoye/(1).png" alt="">
+                            </div>
+                            <span class="zi">首页</span>
+                            <div class="cebianxiaokuaidongkuang"></div>
+                        </a></li>
+
+
+                        <li><a href="#about1">
+                            <div class="cebianxiaokuai">
+                                <img class="xiaotubiaozuozhong" src="../zuoye/(2).png" alt="">
+                            </div>
+                            <span class="zi">干员情报</span>
+                            <div class="cebianxiaokuaidongkuang"></div>
+                            </a></li>
+
+
+                        <li><a href="#about2">
+                            <div class="cebianxiaokuai">
+                                 <img class="xiaotubiaozuozhong" src="../zuoye/(3).png" alt="">
+                            </div>
+                            <span class="zi">世界观资料</span>
+                            <div class="cebianxiaokuaidongkuang"></div>
+
+                        </a></li>
+
+
+                        <li><a href="#about3">
+                            <div class="cebianxiaokuai">
+                                <img class="xiaotubiaozuozhong" src="../zuoye/(4).png" alt="">
+                            </div>
+                            <span class="zi">影响资料</span>
+                            <div class="cebianxiaokuaidongkuang"></div>
+                        </a></li>
+
+                        <li><a href="#about4">
+                            <div class="cebianxiaokuai">
+                                <img class="xiaotubiaozuozhong" src="../zuoye/(5).png" alt="">
+                            </div>
+                            <span class="zi">玩法介绍</span>
+                            <div class="cebianxiaokuaidongkuang"></div>
+                        </a></li>
+
+                        <li><a href="#about5">
+                            <div class="cebianxiaokuai">
+                                <img class="xiaotubiaozuozhong" src="../zuoye/(6).png" alt="">
+                            </div>
+                            <span class="zi">公告</span>
+                            <div class="cebianxiaokuaidongkuang"></div>
+                        </a></li>                
+
+                    </ul>
+                </nav>
+
+                </div>
+
+
+            </div>
+            <div class="zhuyemian">
+                <img class="zhuyemiantupian1" src="./kv.4584e64b.jpg"  alt="">
+            </div>    
+    </section>
+    <section class="dierye" id="about1">
+        <img src="./erminat-1769785178887.png" alt="">
+    </section>
+    <section class="dierye" id="about2">
+        <img src="./san-1769785366483.png" alt="">
+    </section>
+    <section class="dierye" id="about3">
+        <img src="./si-1769785393547.png" alt="">
+    </section>
+    <section class="dierye" id="about4">
+        <img src="./wu-1769785419421.png" alt="">
+    </section>
+    <section class="dierye" id="about5">
+        <img src="./liu-1769785459400.png" alt="">
+    </section>
+    <footer class="wei">
+        <img class="wei" src="./wei.png" alt="">
+
+    </footer>
+    
+
+    
+</body>
+</html>
